@@ -11,6 +11,7 @@ contract PasswordStore {
     error PasswordStore__NotOwner();
 
     address private s_owner;
+    // @audit Any user can see the password as with the address this slot is exposed and info is not encrypted
     string private s_password;
 
     event SetNetPassword();
@@ -23,6 +24,7 @@ contract PasswordStore {
      * @notice This function allows only the owner to set a new password.
      * @param newPassword The new password to set.
      */
+    // @audit Any user can change the password
     function setPassword(string memory newPassword) external {
         s_password = newPassword;
         emit SetNetPassword();
